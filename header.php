@@ -11,6 +11,9 @@
 </head>
 
 <body>
+
+<?php var_dump(get_page_template()); ?>
+
 <header class="page_header"> 
   <span class="show_mobile flaticon-menu48"></span>
   <h3 id="page_title" class="header_title"><a href="index.php">NUTRICION EVOLUTIVA</a></h3>

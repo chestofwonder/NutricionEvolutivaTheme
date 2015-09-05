@@ -1,4 +1,5 @@
 <?php get_header(); ?>
+
 	<header>
 		<h1>La nutrición evolutiva es el paradigma científico para estar sano y delgado, comiendo como lo hemos hecho siempre.</h1>
     	<br/>
@@ -228,5 +229,6 @@
         </a>
     </article>
 </section>
+<?php get_footer(); ?>
 </body>
 </html>
