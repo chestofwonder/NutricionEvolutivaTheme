@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost:8889
--- Tiempo de generación: 05-09-2015 a las 17:19:31
+-- Tiempo de generación: 05-09-2015 a las 17:31:27
 -- Versión del servidor: 5.5.38
 -- Versión de PHP: 5.6.2
 
@@ -19,6 +19,47 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `wordpress`
 --
+CREATE DATABASE IF NOT EXISTS `wordpress` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `wordpress`;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `wp_commentmeta`
+--
+
+DROP TABLE IF EXISTS `wp_commentmeta`;
+CREATE TABLE IF NOT EXISTS `wp_commentmeta` (
+`meta_id` bigint(20) unsigned NOT NULL,
+  `comment_id` bigint(20) unsigned NOT NULL DEFAULT '0',
+  `meta_key` varchar(255) DEFAULT NULL,
+  `meta_value` longtext
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `wp_comments`
+--
+
+DROP TABLE IF EXISTS `wp_comments`;
+CREATE TABLE IF NOT EXISTS `wp_comments` (
+`comment_ID` bigint(20) unsigned NOT NULL,
+  `comment_post_ID` bigint(20) unsigned NOT NULL DEFAULT '0',
+  `comment_author` tinytext NOT NULL,
+  `comment_author_email` varchar(100) NOT NULL DEFAULT '',
+  `comment_author_url` varchar(200) NOT NULL DEFAULT '',
+  `comment_author_IP` varchar(100) NOT NULL DEFAULT '',
+  `comment_date` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `comment_date_gmt` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `comment_content` text NOT NULL,
+  `comment_karma` int(11) NOT NULL DEFAULT '0',
+  `comment_approved` varchar(20) NOT NULL DEFAULT '1',
+  `comment_agent` varchar(255) NOT NULL DEFAULT '',
+  `comment_type` varchar(20) NOT NULL DEFAULT '',
+  `comment_parent` bigint(20) unsigned NOT NULL DEFAULT '0',
+  `user_id` bigint(20) unsigned NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `wp_comments`
@@ -26,6 +67,43 @@ SET time_zone = "+00:00";
 
 INSERT INTO `wp_comments` (`comment_ID`, `comment_post_ID`, `comment_author`, `comment_author_email`, `comment_author_url`, `comment_author_IP`, `comment_date`, `comment_date_gmt`, `comment_content`, `comment_karma`, `comment_approved`, `comment_agent`, `comment_type`, `comment_parent`, `user_id`) VALUES
 (1, 1, 'Mr WordPress', '', 'https://wordpress.org/', '', '2015-08-20 19:14:44', '2015-08-20 19:14:44', 'Hi, this is a comment.\nTo delete a comment, just log in and view the post&#039;s comments. There you will have the option to edit or delete them.', 0, '1', '', '', 0, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `wp_links`
+--
+
+DROP TABLE IF EXISTS `wp_links`;
+CREATE TABLE IF NOT EXISTS `wp_links` (
+`link_id` bigint(20) unsigned NOT NULL,
+  `link_url` varchar(255) NOT NULL DEFAULT '',
+  `link_name` varchar(255) NOT NULL DEFAULT '',
+  `link_image` varchar(255) NOT NULL DEFAULT '',
+  `link_target` varchar(25) NOT NULL DEFAULT '',
+  `link_description` varchar(255) NOT NULL DEFAULT '',
+  `link_visible` varchar(20) NOT NULL DEFAULT 'Y',
+  `link_owner` bigint(20) unsigned NOT NULL DEFAULT '1',
+  `link_rating` int(11) NOT NULL DEFAULT '0',
+  `link_updated` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `link_rel` varchar(255) NOT NULL DEFAULT '',
+  `link_notes` mediumtext NOT NULL,
+  `link_rss` varchar(255) NOT NULL DEFAULT ''
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `wp_options`
+--
+
+DROP TABLE IF EXISTS `wp_options`;
+CREATE TABLE IF NOT EXISTS `wp_options` (
+`option_id` bigint(20) unsigned NOT NULL,
+  `option_name` varchar(64) NOT NULL DEFAULT '',
+  `option_value` longtext NOT NULL,
+  `autoload` varchar(20) NOT NULL DEFAULT 'yes'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `wp_options`
@@ -150,6 +228,20 @@ INSERT INTO `wp_options` (`option_id`, `option_name`, `option_value`, `autoload`
 (171, '_site_transient_update_themes', 'O:8:"stdClass":4:{s:12:"last_checked";i:1441466200;s:7:"checked";a:4:{s:23:"NutricionEvolutivaTheme";s:0:"";s:13:"twentyfifteen";s:3:"1.0";s:14:"twentyfourteen";s:3:"1.3";s:14:"twentythirteen";s:3:"1.4";}s:8:"response";a:3:{s:13:"twentyfifteen";a:4:{s:5:"theme";s:13:"twentyfifteen";s:11:"new_version";s:3:"1.3";s:3:"url";s:43:"https://wordpress.org/themes/twentyfifteen/";s:7:"package";s:59:"https://downloads.wordpress.org/theme/twentyfifteen.1.3.zip";}s:14:"twentyfourteen";a:4:{s:5:"theme";s:14:"twentyfourteen";s:11:"new_version";s:3:"1.5";s:3:"url";s:44:"https://wordpress.org/themes/twentyfourteen/";s:7:"package";s:60:"https://downloads.wordpress.org/theme/twentyfourteen.1.5.zip";}s:14:"twentythirteen";a:4:{s:5:"theme";s:14:"twentythirteen";s:11:"new_version";s:3:"1.6";s:3:"url";s:44:"https://wordpress.org/themes/twentythirteen/";s:7:"package";s:60:"https://downloads.wordpress.org/theme/twentythirteen.1.6.zip";}}s:12:"translations";a:0:{}}', 'yes'),
 (172, '_site_transient_update_plugins', 'O:8:"stdClass":4:{s:12:"last_checked";i:1441466200;s:8:"response";a:1:{s:19:"akismet/akismet.php";O:8:"stdClass":6:{s:2:"id";s:2:"15";s:4:"slug";s:7:"akismet";s:6:"plugin";s:19:"akismet/akismet.php";s:11:"new_version";s:5:"3.1.3";s:3:"url";s:38:"https://wordpress.org/plugins/akismet/";s:7:"package";s:56:"https://downloads.wordpress.org/plugin/akismet.3.1.3.zip";}}s:12:"translations";a:0:{}s:9:"no_update";a:1:{s:9:"hello.php";O:8:"stdClass":6:{s:2:"id";s:4:"3564";s:4:"slug";s:11:"hello-dolly";s:6:"plugin";s:9:"hello.php";s:11:"new_version";s:3:"1.6";s:3:"url";s:42:"https://wordpress.org/plugins/hello-dolly/";s:7:"package";s:58:"https://downloads.wordpress.org/plugin/hello-dolly.1.6.zip";}}}', 'yes');
 
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `wp_postmeta`
+--
+
+DROP TABLE IF EXISTS `wp_postmeta`;
+CREATE TABLE IF NOT EXISTS `wp_postmeta` (
+`meta_id` bigint(20) unsigned NOT NULL,
+  `post_id` bigint(20) unsigned NOT NULL DEFAULT '0',
+  `meta_key` varchar(255) DEFAULT NULL,
+  `meta_value` longtext
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 --
 -- Volcado de datos para la tabla `wp_postmeta`
 --
@@ -166,6 +258,39 @@ INSERT INTO `wp_postmeta` (`meta_id`, `post_id`, `meta_key`, `meta_value`) VALUE
 (9, 8, '_wp_trash_meta_time', '1441378167'),
 (10, 11, '_edit_last', '1'),
 (11, 11, '_edit_lock', '1441378312:1');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `wp_posts`
+--
+
+DROP TABLE IF EXISTS `wp_posts`;
+CREATE TABLE IF NOT EXISTS `wp_posts` (
+`ID` bigint(20) unsigned NOT NULL,
+  `post_author` bigint(20) unsigned NOT NULL DEFAULT '0',
+  `post_date` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `post_date_gmt` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `post_content` longtext NOT NULL,
+  `post_title` text NOT NULL,
+  `post_excerpt` text NOT NULL,
+  `post_status` varchar(20) NOT NULL DEFAULT 'publish',
+  `comment_status` varchar(20) NOT NULL DEFAULT 'open',
+  `ping_status` varchar(20) NOT NULL DEFAULT 'open',
+  `post_password` varchar(20) NOT NULL DEFAULT '',
+  `post_name` varchar(200) NOT NULL DEFAULT '',
+  `to_ping` text NOT NULL,
+  `pinged` text NOT NULL,
+  `post_modified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `post_modified_gmt` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `post_content_filtered` longtext NOT NULL,
+  `post_parent` bigint(20) unsigned NOT NULL DEFAULT '0',
+  `guid` varchar(255) NOT NULL DEFAULT '',
+  `menu_order` int(11) NOT NULL DEFAULT '0',
+  `post_type` varchar(20) NOT NULL DEFAULT 'post',
+  `post_mime_type` varchar(100) NOT NULL DEFAULT '',
+  `comment_count` bigint(20) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `wp_posts`
@@ -185,6 +310,20 @@ INSERT INTO `wp_posts` (`ID`, `post_author`, `post_date`, `post_date_gmt`, `post
 (13, 1, '2015-09-04 14:53:48', '2015-09-04 14:53:48', 'hhjhhjhjhjhhkj', 'prueba', '', 'inherit', 'open', 'open', '', '11-revision-v1', '', '', '2015-09-04 14:53:48', '2015-09-04 14:53:48', '', 11, 'http://localhost:8888/11-revision-v1/', 0, 'revision', '', 0),
 (14, 1, '2015-09-04 15:07:11', '0000-00-00 00:00:00', '', 'Auto Draft', '', 'auto-draft', 'open', 'open', '', '', '', '', '2015-09-04 15:07:11', '0000-00-00 00:00:00', '', 0, 'http://localhost:8888/?p=14', 0, 'post', '', 0);
 
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `wp_terms`
+--
+
+DROP TABLE IF EXISTS `wp_terms`;
+CREATE TABLE IF NOT EXISTS `wp_terms` (
+`term_id` bigint(20) unsigned NOT NULL,
+  `name` varchar(200) NOT NULL DEFAULT '',
+  `slug` varchar(200) NOT NULL DEFAULT '',
+  `term_group` bigint(10) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 --
 -- Volcado de datos para la tabla `wp_terms`
 --
@@ -193,12 +332,41 @@ INSERT INTO `wp_terms` (`term_id`, `name`, `slug`, `term_group`) VALUES
 (1, 'Uncategorized', 'uncategorized', 0),
 (2, 'recetas', 'recetas', 0);
 
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `wp_term_relationships`
+--
+
+DROP TABLE IF EXISTS `wp_term_relationships`;
+CREATE TABLE IF NOT EXISTS `wp_term_relationships` (
+  `object_id` bigint(20) unsigned NOT NULL DEFAULT '0',
+  `term_taxonomy_id` bigint(20) unsigned NOT NULL DEFAULT '0',
+  `term_order` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 --
 -- Volcado de datos para la tabla `wp_term_relationships`
 --
 
 INSERT INTO `wp_term_relationships` (`object_id`, `term_taxonomy_id`, `term_order`) VALUES
 (1, 1, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `wp_term_taxonomy`
+--
+
+DROP TABLE IF EXISTS `wp_term_taxonomy`;
+CREATE TABLE IF NOT EXISTS `wp_term_taxonomy` (
+`term_taxonomy_id` bigint(20) unsigned NOT NULL,
+  `term_id` bigint(20) unsigned NOT NULL DEFAULT '0',
+  `taxonomy` varchar(32) NOT NULL DEFAULT '',
+  `description` longtext NOT NULL,
+  `parent` bigint(20) unsigned NOT NULL DEFAULT '0',
+  `count` bigint(20) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `wp_term_taxonomy`
@@ -207,6 +375,20 @@ INSERT INTO `wp_term_relationships` (`object_id`, `term_taxonomy_id`, `term_orde
 INSERT INTO `wp_term_taxonomy` (`term_taxonomy_id`, `term_id`, `taxonomy`, `description`, `parent`, `count`) VALUES
 (1, 1, 'category', '', 0, 1),
 (2, 2, 'category', '', 0, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `wp_usermeta`
+--
+
+DROP TABLE IF EXISTS `wp_usermeta`;
+CREATE TABLE IF NOT EXISTS `wp_usermeta` (
+`umeta_id` bigint(20) unsigned NOT NULL,
+  `user_id` bigint(20) unsigned NOT NULL DEFAULT '0',
+  `meta_key` varchar(255) DEFAULT NULL,
+  `meta_value` longtext
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `wp_usermeta`
@@ -231,6 +413,26 @@ INSERT INTO `wp_usermeta` (`umeta_id`, `user_id`, `meta_key`, `meta_value`) VALU
 (18, 1, 'wp_user-settings-time', '1440169262'),
 (19, 1, 'session_tokens', 'a:1:{s:64:"2a4495d48e8473d398e93035c9bf3370bc58f81eab1f0c7d3b59de930521ffaa";a:4:{s:10:"expiration";i:1441552029;s:2:"ip";s:3:"::1";s:2:"ua";s:82:"Mozilla/5.0 (Macintosh; Intel Mac OS X 10.10; rv:40.0) Gecko/20100101 Firefox/40.0";s:5:"login";i:1441379229;}}');
 
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `wp_users`
+--
+
+DROP TABLE IF EXISTS `wp_users`;
+CREATE TABLE IF NOT EXISTS `wp_users` (
+`ID` bigint(20) unsigned NOT NULL,
+  `user_login` varchar(60) NOT NULL DEFAULT '',
+  `user_pass` varchar(64) NOT NULL DEFAULT '',
+  `user_nicename` varchar(50) NOT NULL DEFAULT '',
+  `user_email` varchar(100) NOT NULL DEFAULT '',
+  `user_url` varchar(100) NOT NULL DEFAULT '',
+  `user_registered` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `user_activation_key` varchar(60) NOT NULL DEFAULT '',
+  `user_status` int(11) NOT NULL DEFAULT '0',
+  `display_name` varchar(250) NOT NULL DEFAULT ''
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 --
 -- Volcado de datos para la tabla `wp_users`
 --
@@ -238,6 +440,130 @@ INSERT INTO `wp_usermeta` (`umeta_id`, `user_id`, `meta_key`, `meta_value`) VALU
 INSERT INTO `wp_users` (`ID`, `user_login`, `user_pass`, `user_nicename`, `user_email`, `user_url`, `user_registered`, `user_activation_key`, `user_status`, `display_name`) VALUES
 (1, 'wordpress', '$P$BbT4dgAzNwPaeO1vcAfYyYhyioa3Vp0', 'wordpress', 'miguelarroyoes@hotmail.com', '', '2015-08-20 19:14:44', '', 0, 'wordpress');
 
+--
+-- Índices para tablas volcadas
+--
+
+--
+-- Indices de la tabla `wp_commentmeta`
+--
+ALTER TABLE `wp_commentmeta`
+ ADD PRIMARY KEY (`meta_id`), ADD KEY `comment_id` (`comment_id`), ADD KEY `meta_key` (`meta_key`);
+
+--
+-- Indices de la tabla `wp_comments`
+--
+ALTER TABLE `wp_comments`
+ ADD PRIMARY KEY (`comment_ID`), ADD KEY `comment_post_ID` (`comment_post_ID`), ADD KEY `comment_approved_date_gmt` (`comment_approved`,`comment_date_gmt`), ADD KEY `comment_date_gmt` (`comment_date_gmt`), ADD KEY `comment_parent` (`comment_parent`), ADD KEY `comment_author_email` (`comment_author_email`(10));
+
+--
+-- Indices de la tabla `wp_links`
+--
+ALTER TABLE `wp_links`
+ ADD PRIMARY KEY (`link_id`), ADD KEY `link_visible` (`link_visible`);
+
+--
+-- Indices de la tabla `wp_options`
+--
+ALTER TABLE `wp_options`
+ ADD PRIMARY KEY (`option_id`), ADD UNIQUE KEY `option_name` (`option_name`);
+
+--
+-- Indices de la tabla `wp_postmeta`
+--
+ALTER TABLE `wp_postmeta`
+ ADD PRIMARY KEY (`meta_id`), ADD KEY `post_id` (`post_id`), ADD KEY `meta_key` (`meta_key`);
+
+--
+-- Indices de la tabla `wp_posts`
+--
+ALTER TABLE `wp_posts`
+ ADD PRIMARY KEY (`ID`), ADD KEY `post_name` (`post_name`), ADD KEY `type_status_date` (`post_type`,`post_status`,`post_date`,`ID`), ADD KEY `post_parent` (`post_parent`), ADD KEY `post_author` (`post_author`);
+
+--
+-- Indices de la tabla `wp_terms`
+--
+ALTER TABLE `wp_terms`
+ ADD PRIMARY KEY (`term_id`), ADD KEY `slug` (`slug`), ADD KEY `name` (`name`);
+
+--
+-- Indices de la tabla `wp_term_relationships`
+--
+ALTER TABLE `wp_term_relationships`
+ ADD PRIMARY KEY (`object_id`,`term_taxonomy_id`), ADD KEY `term_taxonomy_id` (`term_taxonomy_id`);
+
+--
+-- Indices de la tabla `wp_term_taxonomy`
+--
+ALTER TABLE `wp_term_taxonomy`
+ ADD PRIMARY KEY (`term_taxonomy_id`), ADD UNIQUE KEY `term_id_taxonomy` (`term_id`,`taxonomy`), ADD KEY `taxonomy` (`taxonomy`);
+
+--
+-- Indices de la tabla `wp_usermeta`
+--
+ALTER TABLE `wp_usermeta`
+ ADD PRIMARY KEY (`umeta_id`), ADD KEY `user_id` (`user_id`), ADD KEY `meta_key` (`meta_key`);
+
+--
+-- Indices de la tabla `wp_users`
+--
+ALTER TABLE `wp_users`
+ ADD PRIMARY KEY (`ID`), ADD KEY `user_login_key` (`user_login`), ADD KEY `user_nicename` (`user_nicename`);
+
+--
+-- AUTO_INCREMENT de las tablas volcadas
+--
+
+--
+-- AUTO_INCREMENT de la tabla `wp_commentmeta`
+--
+ALTER TABLE `wp_commentmeta`
+MODIFY `meta_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT de la tabla `wp_comments`
+--
+ALTER TABLE `wp_comments`
+MODIFY `comment_ID` bigint(20) unsigned NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT de la tabla `wp_links`
+--
+ALTER TABLE `wp_links`
+MODIFY `link_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT de la tabla `wp_options`
+--
+ALTER TABLE `wp_options`
+MODIFY `option_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT de la tabla `wp_postmeta`
+--
+ALTER TABLE `wp_postmeta`
+MODIFY `meta_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT de la tabla `wp_posts`
+--
+ALTER TABLE `wp_posts`
+MODIFY `ID` bigint(20) unsigned NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT de la tabla `wp_terms`
+--
+ALTER TABLE `wp_terms`
+MODIFY `term_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT de la tabla `wp_term_taxonomy`
+--
+ALTER TABLE `wp_term_taxonomy`
+MODIFY `term_taxonomy_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT de la tabla `wp_usermeta`
+--
+ALTER TABLE `wp_usermeta`
+MODIFY `umeta_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT de la tabla `wp_users`
+--
+ALTER TABLE `wp_users`
+MODIFY `ID` bigint(20) unsigned NOT NULL AUTO_INCREMENT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
