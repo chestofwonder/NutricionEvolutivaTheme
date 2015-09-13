@@ -8,6 +8,4 @@
  */
 
 get_header(); ?>
-<div>este es el single post</div>
-	
-
+<div>este es el single post de recetas</div>
