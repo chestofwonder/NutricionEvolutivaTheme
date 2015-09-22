@@ -11,6 +11,9 @@ function preloader(){
 	var totalSlides = slides.lenght;
 	var slideCache = [];
 	
+        alert(slides);
+        
+        
 	if(slideCount < totalSlides){
 		slideCache[slideCount] = new Image();
 		slideCache[slideCount].src = slides.eq(slideCount).find('img').attr('src');
